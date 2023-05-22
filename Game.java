@@ -4,6 +4,7 @@ public class Game{
   public boolean hasMoves = true;
   public int numOfHands = 1;
   public ArrayList<Card> hand = new ArrayList<Card>();
+  public Scanner in = new Scanner(System.in);
   public void game(){
     if(numOfHands == 1){
       startGame();
@@ -15,17 +16,22 @@ public class Game{
     displayCards();
     while(hasMoves){
       move = getMove();
-      if(move == HIT){
+      if(move.equals("hit")){
         hand.add(getCard());
         displayCards();
         checkForMoves();
       }
-      if(move == STAND){
+      if(move.equals("stand")){
         hasMoves = false;
       }
     }
     dealerMove();
     declareWinner();
+  }
+  public String getMove(){
+    System.out.println("Please enter your move. Either hit or stand: ");
+    String s = in.nextLine();
+    return s;
   }
   public static void startGame(){
     System.out.println("Welcome to the casino!");
