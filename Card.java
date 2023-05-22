@@ -1,6 +1,10 @@
 public class Card{
   private int value;
 
+  public Card(int val){
+    value = val;
+  }
+
   public void displayValue(){
     System.out.println(value);
   }
@@ -12,4 +16,5 @@ public class Card{
   public void assignValue(int newVal){
     value = newVal;
   }
+
 }
