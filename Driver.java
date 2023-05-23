@@ -8,6 +8,9 @@ public class Driver{
 
     //testing deck
     Deck tester = new Deck();
+    tester.printDeck();
+    tester.shuffle();
+    tester.printDeck();
 
   }
 }
