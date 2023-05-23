@@ -26,13 +26,37 @@ public class Game{
         }
       }
     }
-    dealerhandMove();
+    dealerMove();
     declareWinner();
   }
 
+  public void declareWinner(){
+    maxHand = 0;
+    for(int i = 0; i < hands.size(); i++){
+      Hand hand = hands.get(i);
+      if(hand.getValue() <= 21 && hand.getValue() > maxHand){
+        maxHand = hand.getValue;
+        maxHandnum = i;
+      }
+    }
+    if(dealer.getValue() <=21 && dealer.getValue() > maxHand){
+      System.out.println("Oh well, the dealer won.");
+    }
+    else{
+      System.out.println("Congrats. Player " + i+1 + " won.");
+    }
+  }
   public void dealerMove(){
-    dealHand(dealerHand);
-
+    Hand dealer = new Hand();
+    dealer.dealHand();
+    while(dealer.hasMoves()){
+      if(dealer.getValue() <= 16){
+        dealer.hit();
+      }
+      else(
+        dealer.stand();
+      )
+    }
   }
   public void nextTurn(){
     System.out.println("Alright. Ready to play again?");

@@ -1,6 +1,6 @@
 public class Hand{
   private ArrayList<Card> hand = new ArrayList<Card>();
-
+  private boolean hasMoves = true;
   public hand(){
 
   }
@@ -9,6 +9,14 @@ public class Hand{
     Card card2 = Deck.deal();
     hand.add(card1);
     hand.add(card2);
+  }
+  public void stand(){
+    hasMoves = false;
+  }
+
+  public void hit(){
+    hand.add(Deck.deal());
+    displayCards();
   }
 
   public void displayCards(){
@@ -35,9 +43,9 @@ public class Hand{
 
   public boolean hasMoves(){
     if(getValue() >= 21){
-      return false;
+      hasMoves = false;
     }
-    return true;
+    return hasMoves;
   }
 
   public int getValue(){
