@@ -11,11 +11,11 @@ info
 info
 
 
-## GROUP MEMBER 2
+## JOCELYN MO
 
-### date x
+### 05/22
 
-info
+finished card class, started deck
 
 ### date y
 
