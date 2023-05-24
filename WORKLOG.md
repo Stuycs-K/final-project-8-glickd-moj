@@ -10,6 +10,10 @@ began gameStructure branch and coded a game skeleton
 
 made a hand class in order to create abstraction for the game
 
+### 5/24
+
+finished up game except for calculating the winner needs debugging
+
 
 ## JOCELYN MO
 
