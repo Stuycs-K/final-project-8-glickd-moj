@@ -78,7 +78,7 @@ public class Game{
     System.out.println("The rules of blackjack are pretty simple: ");
     System.out.println("How many players would you like in the game?  ");
     String s = in.nextLine();
-    int j = parseInt(s);
+    int j = Integer.parseInt(s);
     numOfHands = j;
     for(int i = 0; i < numOfHands; i++){
       hands.add(new Hand());
