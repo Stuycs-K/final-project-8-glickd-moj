@@ -1,5 +1,80 @@
-public class Game{
-  //start game displays intrsuctions
+import java.util.*;
 
-  //while userTurn{ user chooses}
+public class Game{
+  public int numOfHands = 1;
+  public ArrayList<Hand> hands = new ArrayList<Hand>();
+  public ArrayList<Card> dealerHand = new ArrayList<Card>();
+  public Scanner in = new Scanner(System.in);
+  public Deck deck = new Deck();
+  public Hand dealer = new Hand();
+  public void game(){
+    if(numOfHands == 1){
+      startGame();
+    }
+    else{
+      nextTurn();
+    }
+    deck.shuffle();
+    for(int i = 0; i < hands.size(); i++){
+      Hand hand  = hands.get(i);
+      hand.dealHand(deck);
+      hand.displayCards();
+      while(hand.hasMoves()){
+        String move = getMove();
+        if(move.equals("hit")){
+          hand.hit(deck);
+        }
+        if(move.equals("stand")){
+          hand.stand();
+        }
+      }
+    }
+    dealerMove();
+    declareWinner();
+  }
+
+  public void declareWinner(){
+    int maxHand = 0;
+    int maxHandnum = 0;
+    int playNum = 0;
+    for(int i = 0; i < hands.size(); i++){
+      Hand hand = hands.get(i);
+      if(hand.getValue() <= 21 && hand.getValue() > maxHand){
+        maxHand = hand.getValue();
+        maxHandnum = i;
+      }
+      playNum = i;
+    }
+    if(dealer.getValue() <=21 && dealer.getValue() > maxHand){
+      System.out.println("Oh well, the dealer won.");
+    }
+    else{
+      System.out.println("Congrats. Player " + playNum+1 + " won.");
+    }
+  }
+  public void dealerMove(){
+    dealer.dealHand(deck);
+    while(dealer.hasMoves()){
+      if(dealer.getValue() <= 16){
+        dealer.hit(deck);
+      }
+      else{
+        dealer.stand();
+      }
+    }
+  }
+  public void nextTurn(){
+    System.out.println("Alright. Ready to play again?");
+    System.out.println("Let's go!");
+  }
+  public String getMove(){
+    System.out.println("Please enter your move. Either hit or stand: ");
+    String s = in.nextLine();
+    return s;
+  }
+  public static void startGame(){
+    System.out.println("Welcome to the casino!");
+    System.out.println("Today you will be playing Blackjack.");
+    System.out.println("The rules of blackjack are pretty simple: ");
+  }
 }
