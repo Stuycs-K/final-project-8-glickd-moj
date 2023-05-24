@@ -72,9 +72,16 @@ public class Game{
     String s = in.nextLine();
     return s;
   }
-  public static void startGame(){
+  public void startGame(){
     System.out.println("Welcome to the casino!");
     System.out.println("Today you will be playing Blackjack.");
     System.out.println("The rules of blackjack are pretty simple: ");
+    System.out.println("How many players would you like in the game?  ");
+    String s = in.nextLine();
+    int j = parseInt(s);
+    numOfHands = j;
+    for(int i = 0; i < numOfHands; i++){
+      hands.add(new Hand());
+    }
   }
 }
