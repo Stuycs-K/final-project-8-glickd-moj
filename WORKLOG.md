@@ -1,14 +1,14 @@
 # Work Log
 
-## GROUP MEMBER 1
+## David Glick
 
-### date x
+### 5/22
 
-info
+began gameStructure branch and coded a game skeleton
 
-### date y
+### 5/23
 
-info
+made a hand class in order to create abstraction for the game
 
 
 ## JOCELYN MO
