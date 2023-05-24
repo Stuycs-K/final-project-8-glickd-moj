@@ -1,12 +1,13 @@
+import java.util.*;
 public class Hand{
   private ArrayList<Card> hand = new ArrayList<Card>();
   private boolean hasMoves = true;
-  public hand(){
-
+  public Hand(){
+    hasMoves = true;
   }
-  public void dealHand(){
-    Card card1 = Deck.deal();
-    Card card2 = Deck.deal();
+  public void dealHand(Deck deck){
+    Card card1 = deck.deal();
+    Card card2 = deck.deal();
     hand.add(card1);
     hand.add(card2);
   }
@@ -14,8 +15,8 @@ public class Hand{
     hasMoves = false;
   }
 
-  public void hit(){
-    hand.add(Deck.deal());
+  public void hit(Deck deck){
+    hand.add(deck.deal());
     displayCards();
   }
 

@@ -5,6 +5,8 @@ public class Game{
   public ArrayList<Hand> hands = new ArrayList<Hand>();
   public ArrayList<Card> dealerHand = new ArrayList<Card>();
   public Scanner in = new Scanner(System.in);
+  public Deck deck = new Deck();
+  public Hand dealer = new Hand();
   public void game(){
     if(numOfHands == 1){
       startGame();
@@ -12,14 +14,15 @@ public class Game{
     else{
       nextTurn();
     }
+    deck.shuffle();
     for(int i = 0; i < hands.size(); i++){
       Hand hand  = hands.get(i);
-      hand.dealHand();
+      hand.dealHand(deck);
       hand.displayCards();
       while(hand.hasMoves()){
         String move = getMove();
         if(move.equals("hit")){
-          hand.hit();
+          hand.hit(deck);
         }
         if(move.equals("stand")){
           hand.stand();
@@ -31,31 +34,33 @@ public class Game{
   }
 
   public void declareWinner(){
-    maxHand = 0;
+    int maxHand = 0;
+    int maxHandnum = 0;
+    int playNum = 0;
     for(int i = 0; i < hands.size(); i++){
       Hand hand = hands.get(i);
       if(hand.getValue() <= 21 && hand.getValue() > maxHand){
-        maxHand = hand.getValue;
+        maxHand = hand.getValue();
         maxHandnum = i;
       }
+      playNum = i;
     }
     if(dealer.getValue() <=21 && dealer.getValue() > maxHand){
       System.out.println("Oh well, the dealer won.");
     }
     else{
-      System.out.println("Congrats. Player " + i+1 + " won.");
+      System.out.println("Congrats. Player " + playNum+1 + " won.");
     }
   }
   public void dealerMove(){
-    Hand dealer = new Hand();
-    dealer.dealHand();
+    dealer.dealHand(deck);
     while(dealer.hasMoves()){
       if(dealer.getValue() <= 16){
-        dealer.hit();
+        dealer.hit(deck);
       }
-      else(
+      else{
         dealer.stand();
-      )
+      }
     }
   }
   public void nextTurn(){
