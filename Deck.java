@@ -24,7 +24,7 @@ public class Deck{
   public void printDeck(){
     String ans = "[";
     for (int i = 0; i < size(); i++){
-      ans += deck.get(i) + " ";
+      ans += deck.get(i).getValue() + " ";
     }
     System.out.println(ans + "]");
   }
@@ -40,6 +40,7 @@ public class Deck{
       int ind = (int)(Math.random()*size());
       shuffled.add(deck.remove(ind));
     }
+    deck = shuffled;
   }
 
 
