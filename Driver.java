@@ -7,10 +7,13 @@ public class Driver{
     // test.displayValue();
 
     //testing deck
-    Deck tester = new Deck();
-    tester.printDeck();
-    tester.shuffle();
-    tester.printDeck();
+    // Deck tester = new Deck();
+    // tester.printDeck();
+    // tester.shuffle();
+    // tester.printDeck();
+
+    Game game = new Game();
+    game.game();
 
   }
 }

@@ -6,8 +6,9 @@ public class Game{
   public ArrayList<Card> dealerHand = new ArrayList<Card>();
   public Scanner in = new Scanner(System.in);
   public Deck deck = new Deck();
-  public Hand dealer = new Hand();
+  public Hand dealer = new Hand(0);
   public void game(){
+    boolean notAllBust = false;
     if(numOfHands == 1){
       startGame();
     }
@@ -28,29 +29,57 @@ public class Game{
           hand.stand();
         }
       }
+      if(!hand.isBust()){
+        notAllBust = true;
+      }
     }
-    dealerMove();
-    declareWinner();
+    if(notAllBust){
+      dealerMove();
+      declareWinner();
+    }
+    else{
+      if(hands.size() > 1){
+        declareWinnerAllBust();
+      }
+      else{
+        declareWinnerOneBust();
+      }
+    }
+  }
+
+  public void declareWinnerAllBust(){
+    System.out.println("Oh well, everyone busted. The dealer wins.");
+    numOfHands++;
+  }
+
+  public void declareWinnerOneBust(){
+    System.out.println("Oh well, you busted. The dealer wins.");
+    numOfHands++;
+
   }
 
   public void declareWinner(){
-    int maxHand = 0;
-    int maxHandnum = 0;
-    int playNum = 0;
+    int dealerValue = dealer.getValue();
+    int maxHandValue = 0;
+    int maxHandHolder = 0;
     for(int i = 0; i < hands.size(); i++){
-      Hand hand = hands.get(i);
-      if(hand.getValue() <= 21 && hand.getValue() > maxHand){
-        maxHand = hand.getValue();
-        maxHandnum = i;
+      Hand temp = hands.get(i);
+      int value = temp.getValue();
+      if (value > maxHandValue){
+        maxHandValue = value;
+        maxHandHolder= i+1;
       }
-      playNum = i;
     }
-    if(dealer.getValue() <=21 && dealer.getValue() > maxHand){
-      System.out.println("Oh well, the dealer won.");
+    if(maxHandValue < dealerValue){
+      System.out.println("Oh well, the dealer wins.");
     }
-    else{
-      System.out.println("Congrats. Player " + playNum+1 + " won.");
+    if(maxHandValue == dealerValue){
+      System.out.println("Not bad, you pushed.");
     }
+    if(maxHandValue > dealerValue){
+      System.out.println("Great job, player "+ maxHandHolder + " won.");
+    }
+    numOfHands++;
   }
   public void dealerMove(){
     dealer.dealHand(deck);
@@ -81,7 +110,7 @@ public class Game{
     int j = Integer.parseInt(s);
     numOfHands = j;
     for(int i = 0; i < numOfHands; i++){
-      hands.add(new Hand());
+      hands.add(new Hand(i+1));
     }
   }
 }
