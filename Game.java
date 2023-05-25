@@ -2,11 +2,17 @@ import java.util.*;
 
 public class Game{
   public int numOfHands = 1;
-  public ArrayList<Hand> hands = new ArrayList<Hand>();
-  public ArrayList<Card> dealerHand = new ArrayList<Card>();
+  public ArrayList<Hand> hands;
+  public ArrayList<Card> dealerHand;
   public Scanner in = new Scanner(System.in);
-  public Deck deck = new Deck();
-  public Hand dealer = new Hand(0);
+  public Deck deck;
+  public Hand dealer;
+  public Game(){
+    hands = new ArrayList<Hand>();
+    dealerHand  = new ArrayList<Card>();
+    deck = new Deck();
+    dealer = new Hand(0);
+  }
   public void game(){
     boolean notAllBust = false;
     if(numOfHands == 1){
@@ -46,16 +52,23 @@ public class Game{
       }
     }
   }
-
+  public void reset(){
+    System.out.println("Would you like to play again? ");
+    String s = in.nextLine();
+    if(s.equals("yes")){
+      Game game = new Game();
+      numOfHands++;
+      game.game();
+    }
+  }
   public void declareWinnerAllBust(){
     System.out.println("Oh well, everyone busted. The dealer wins.");
-    numOfHands++;
+    reset();
   }
 
   public void declareWinnerOneBust(){
     System.out.println("Oh well, you busted. The dealer wins.");
-    numOfHands++;
-
+    reset();
   }
 
   public void declareWinner(){
@@ -79,7 +92,7 @@ public class Game{
     if(maxHandValue > dealerValue){
       System.out.println("Great job, player "+ maxHandHolder + " won.");
     }
-    numOfHands++;
+    reset();
   }
   public void dealerMove(){
     dealer.dealHand(deck);
