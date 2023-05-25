@@ -14,6 +14,10 @@ made a hand class in order to create abstraction for the game
 
 finished up game except for calculating the winner needs debugging
 
+### 5/25
+
+fixed calculating winner. Need to make reset.
+
 
 ## JOCELYN MO
 
