@@ -10,13 +10,21 @@ began gameStructure branch and coded a game skeleton
 
 made a hand class in order to create abstraction for the game
 
+### 5/24
+
+finished up game except for calculating the winner needs debugging
+
 
 ## JOCELYN MO
 
-### 05/22
+### 5/22
 
 finished card class, started deck
 
-### date y
+### 5/23
 
-info
+finished deck and tested
+
+### 5/24
+
+pushed classes to main and combined with game structure, starting processing platform
