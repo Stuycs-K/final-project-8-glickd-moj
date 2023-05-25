@@ -1,5 +1,6 @@
 # Work Log
 
+<<<<<<< HEAD
 ## GROUP MEMBER 1
 David Glick
 
@@ -8,18 +9,37 @@ David Glick
 At school -- began creating methods to help with the game flow. Ie. set up with instructions and dealing a hand.
 At home-- spent a lot of time working on figuring out how to work on a new branch. Tried cloning, etc. Need help at school
 info
+=======
+## David Glick
 
-### date y
+### 5/22
 
-info
+began gameStructure branch and coded a game skeleton
+>>>>>>> eae01c25342566816d7e4aa90c6adf0de69bdf06
+
+### 5/23
+
+made a hand class in order to create abstraction for the game
+
+### 5/24
+
+finished up game except for calculating the winner needs debugging
+
+### 5/25
+
+fixed calculating winner. Need to make reset.
 
 
-## GROUP MEMBER 2
+## JOCELYN MO
 
-### date x
+### 5/22
 
-info
+finished card class, started deck
 
-### date y
+### 5/23
 
-info
+finished deck and tested
+
+### 5/24
+
+pushed classes to main and combined with game structure, starting processing platform
