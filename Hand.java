@@ -2,8 +2,14 @@ import java.util.*;
 public class Hand{
   private ArrayList<Card> hand = new ArrayList<Card>();
   private boolean hasMoves = true;
-  public Hand(){
+  private boolean bust = false;
+  private String playerNum;
+  public Hand(int i){
     hasMoves = true;
+    playerNum = "" + i;
+    if(i == 0){
+      playerNum = "dealer";
+    }
   }
   public void dealHand(Deck deck){
     Card card1 = deck.deal();
@@ -14,9 +20,14 @@ public class Hand{
   public void stand(){
     hasMoves = false;
   }
-
+  public boolean isBust(){
+    return bust;
+  }
   public void hit(Deck deck){
     hand.add(deck.deal());
+    if(getValue() > 21){
+      bust = true;
+    }
     displayCards();
   }
 
@@ -40,11 +51,22 @@ public class Hand{
         System.out.print(temp.getValue() + " ");
       }
     }
+    System.out.println();
+    if(getValue() <= 21){
+      System.out.println("The total value of player " + playerNum + "'s hand is " + getValue());
+      System.out.println();
+    }
+    else{
+      System.out.println("Whoops, the hand is a bust.");
+      System.out.println();
+      bust = true;
+    }
   }
 
   public boolean hasMoves(){
     if(getValue() >= 21){
       hasMoves = false;
+      bust = true;
     }
     return hasMoves;
   }
@@ -54,16 +76,28 @@ public class Hand{
     int numOfAces = 0;
     for(int i = 0; i < hand.size(); i++){
       Card temp = hand.get(i);
-      if(temp.getValue() != 1){
-        total+= temp.getValue();
+      int value = temp.getValue();
+      if(value > 10){
+        value = 10;
+      }
+      if(value != 1){
+        total+= value;
       }
       else{
         numOfAces++;
       }
     }
+    for(int i = 0; i < numOfAces-1; i++){
+      total++;
+    }
+    if(numOfAces > 0){
+      if(total+11 <= 21){
+        total+= 11;
+      }
+      else{
+        total++;
+      }
+    }
     return total;
   }
-
-
-
 }
