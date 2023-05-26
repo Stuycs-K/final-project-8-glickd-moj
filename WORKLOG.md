@@ -29,6 +29,10 @@ finished up game except for calculating the winner needs debugging
 
 fixed calculating winner. Need to make reset.
 
+### 5/26
+
+made a reset for the game. Also debugged some dealer issues and made prompts more clear. Ready to add chips.
+
 
 ## JOCELYN MO
 
