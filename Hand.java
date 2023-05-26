@@ -28,9 +28,26 @@ public class Hand{
     if(getValue() > 21){
       bust = true;
     }
-    displayCards();
   }
-
+  public void displayDealerCards(){
+    Card temp = hand.get(0);
+    if(temp.getValue() == 1){
+      System.out.print("ACE ");
+    }
+    else if(temp.getValue() == 11){
+      System.out.print("JACK ");
+    }
+    else if(temp.getValue() == 12){
+      System.out.print("QUEEN ");
+    }
+    else if(temp.getValue() == 13){
+      System.out.print("KING ");
+    }
+    else{
+      System.out.print(temp.getValue() + " ");
+    }
+    System.out.println();
+  }
   public void displayCards(){
     System.out.println();
     for(int i = 0; i < hand.size(); i++){
@@ -62,7 +79,6 @@ public class Hand{
       bust = true;
     }
   }
-
   public boolean hasMoves(){
     if(getValue() >= 21){
       hasMoves = false;
@@ -70,7 +86,6 @@ public class Hand{
     }
     return hasMoves;
   }
-
   public int getValue(){
     int total = 0;
     int numOfAces = 0;

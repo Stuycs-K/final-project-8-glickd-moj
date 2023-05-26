@@ -22,14 +22,18 @@ public class Game{
       nextTurn();
     }
     deck.shuffle();
+    dealer.dealHand(deck);
     for(int i = 0; i < hands.size(); i++){
       Hand hand  = hands.get(i);
       hand.dealHand(deck);
       hand.displayCards();
+      System.out.print("The dealer is holding a ");
+      dealer.displayDealerCards();
       while(hand.hasMoves()){
         String move = getMove();
         if(move.equals("hit")){
           hand.hit(deck);
+          hand.displayCards();
         }
         if(move.equals("stand")){
           hand.stand();
@@ -72,29 +76,33 @@ public class Game{
   }
   public void declareWinner(){
     int dealerValue = dealer.getValue();
-    int maxHandValue = 0;
-    int maxHandHolder = 0;
-    for(int i = 0; i < hands.size(); i++){
-      Hand temp = hands.get(i);
-      int value = temp.getValue();
-      if (value > maxHandValue){
-        maxHandValue = value;
-        maxHandHolder= i+1;
+    if(dealerValue > 21){
+      System.out.println("The dealer busted. You won! ");
+    }
+    else{
+      int maxHandValue = 0;
+      int maxHandHolder = 0;
+      for(int i = 0; i < hands.size(); i++){
+        Hand temp = hands.get(i);
+        int value = temp.getValue();
+        if (value > maxHandValue){
+          maxHandValue = value;
+          maxHandHolder= i+1;
+        }
       }
-    }
-    if(maxHandValue < dealerValue){
-      System.out.println("Oh well, the dealer wins.");
-    }
-    if(maxHandValue == dealerValue){
-      System.out.println("Not bad, you pushed.");
-    }
-    if(maxHandValue > dealerValue){
-      System.out.println("Great job, player "+ maxHandHolder + " won.");
+      if(maxHandValue < dealerValue){
+        System.out.println("Oh well, the dealer wins.");
+      }
+      if(maxHandValue == dealerValue){
+        System.out.println("Not bad, you pushed.");
+      }
+      if(maxHandValue > dealerValue){
+        System.out.println("Great job, player "+ maxHandHolder + " won.");
+      }
     }
     reset();
   }
   public void dealerMove(){
-    dealer.dealHand(deck);
     dealer.displayCards();
     while(dealer.hasMoves()){
       if(dealer.getValue() <= 16){
