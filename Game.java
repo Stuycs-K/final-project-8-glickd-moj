@@ -46,18 +46,15 @@ public class Game{
       }
     }
   }
-
   public void declareWinnerAllBust(){
     System.out.println("Oh well, everyone busted. The dealer wins.");
     numOfHands++;
   }
-
   public void declareWinnerOneBust(){
     System.out.println("Oh well, you busted. The dealer wins.");
     numOfHands++;
 
   }
-
   public void declareWinner(){
     int dealerValue = dealer.getValue();
     int maxHandValue = 0;
