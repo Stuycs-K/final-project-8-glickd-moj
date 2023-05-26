@@ -52,8 +52,6 @@ public class Game{
       }
     }
   }
-<<<<<<< HEAD
-=======
   public void reset(){
     System.out.println("Would you like to play again? ");
     String s = in.nextLine();
@@ -63,7 +61,7 @@ public class Game{
       game.game();
     }
   }
->>>>>>> 192aab2754b9505355ca21bf5dc1d4468d5806c2
+
   public void declareWinnerAllBust(){
     System.out.println("Oh well, everyone busted. The dealer wins.");
     reset();
@@ -97,9 +95,11 @@ public class Game{
   }
   public void dealerMove(){
     dealer.dealHand(deck);
+    dealer.displayCards();
     while(dealer.hasMoves()){
       if(dealer.getValue() <= 16){
         dealer.hit(deck);
+        dealer.displayCards();
       }
       else{
         dealer.stand();
