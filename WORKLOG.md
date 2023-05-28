@@ -55,3 +55,7 @@ making the blackjack table, need trig to draw placements of the cards in a semi 
 ### 5/26
 
 doing calculations (mostly on paper) and storing them in static variables to be used in setup()
+
+### 5/27
+
+realized a lot of the math was unnecessary because of the rotate function, still need to figure out why rotate doesn't work
