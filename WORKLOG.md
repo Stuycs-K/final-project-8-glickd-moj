@@ -47,3 +47,11 @@ finished deck and tested
 ### 5/24
 
 pushed classes to main and combined with game structure, starting processing platform
+
+### 5/25
+
+making the blackjack table, need trig to draw placements of the cards in a semi circle
+
+### 5/26
+
+doing calculations (mostly on paper) and storing them in static variables to be used in setup()
