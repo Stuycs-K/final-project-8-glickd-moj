@@ -15,7 +15,7 @@ void setup(){
   arc(WIDTH/2, HEIGHT/4, boardW, 2*boardH, 0, PI);
   fill(255);
   line(WIDTH/2, 0, WIDTH/2, 800);
-  for (int i = 1; i < 8; i++){
+  for (int i = 4; i <8; i++){
     float theta = PI - (increment*i);
     //float slope;
     //if (theta == PI/2){
@@ -30,11 +30,25 @@ void setup(){
     placeholders[2*i-1] = x - 20*cos(beta);
     placeholders[2*i-2] = y - 20*sin(beta);
     fill(255);
-    rotate(theta);
+    translate(x,y);
+    rotate(theta-HALF_PI);
+
+    System.out.println(x + " " + y);
+    translate(-x,-y);
+    System.out.println(-x + " " + -y);
     rect(placeholders[2*i-1], placeholders[2*i-2], 40, 60);
-  }
+            circle(500, 500, 40);
+
+    rotate(HALF_PI-theta);
+
+
+  //translate(500,500);
+  //rotate(2.2);
+  //translate(-500,-500);
+  //rect(500,500,40,50);
+   }
   System.out.println(Arrays.toString(placeholders));
   
 }
-void draw(){
-}
+//void draw(){
+//}
