@@ -63,3 +63,7 @@ realized a lot of the math was unnecessary because of the rotate function, still
 ### 5/29
 
 fixed translation and rotation problem, the seven placeholders for cards displays correctly in semi circle
+
+### 5/30
+
+made up method to print cards in the placeholders and started code for multiple cards in a hand
