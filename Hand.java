@@ -3,9 +3,11 @@ public class Hand{
   private ArrayList<Card> hand = new ArrayList<Card>();
   private boolean hasMoves = true;
   private boolean bust = false;
+  private int chips = 0;
   private String playerNum;
-  public Hand(int i){
+  public Hand(int i, int chip){
     hasMoves = true;
+    chips = chip;
     playerNum = "" + i;
     if(i == 0){
       playerNum = "dealer";
@@ -69,6 +71,10 @@ public class Hand{
       bust = true;
     }
     return hasMoves;
+  }
+
+  public int numOfCards(){
+    return hand.size();
   }
 
   public int getValue(){
