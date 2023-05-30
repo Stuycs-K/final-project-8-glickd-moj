@@ -126,6 +126,8 @@ public class Game{
           hand.setMoves(true);
         }
       }
+      numOfHands++;
+      game();
     }
     else{
       System.out.println("Thanks for playing!");
