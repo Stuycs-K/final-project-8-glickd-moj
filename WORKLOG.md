@@ -59,3 +59,7 @@ doing calculations (mostly on paper) and storing them in static variables to be 
 ### 5/27
 
 realized a lot of the math was unnecessary because of the rotate function, still need to figure out why rotate doesn't work
+
+### 5/29
+
+fixed translation and rotation problem, the seven placeholders for cards displays correctly in semi circle
