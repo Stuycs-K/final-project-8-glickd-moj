@@ -74,9 +74,6 @@ public class Game{
     if(numOfHands == 1){
       startGame();
     }
-    else{
-      nextTurn();
-    }
   }
   public void dealerMove(){
     dealer.dealHand(deck);

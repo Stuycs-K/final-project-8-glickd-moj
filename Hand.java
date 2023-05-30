@@ -13,6 +13,19 @@ public class Hand{
       playerNum = "dealer";
     }
   }
+  public void removeCards(){
+    hand.clear();
+  }
+
+  public void setBust(boolean x){
+    bust = x;
+  }
+  public int getChips(){
+    return chips;
+  }
+  public void setMoves(boolean x){
+    hasMoves =x;
+  }
   public void dealHand(Deck deck){
     Card card1 = deck.deal();
     Card card2 = deck.deal();
