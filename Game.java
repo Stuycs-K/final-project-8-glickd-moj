@@ -11,12 +11,12 @@ public class Game{
   public int dealersNum;
   public void game(){
     showPrompts();
-    deck.shuffle();
     for(int i = 0; i < hands.size(); i++){
       Hand hand  = hands.get(i);
       playerMove(hand);
     }
     determineWinner();
+    reset();
   }
 
   public void determineWinner(){
@@ -70,7 +70,6 @@ public class Game{
       }
     }
   }
-
   public void showPrompts(){
     if(numOfHands == 1){
       startGame();
@@ -79,40 +78,6 @@ public class Game{
       nextTurn();
     }
   }
-  // public void declareWinnerAllBust(){
-  //   System.out.println("Oh well, everyone busted. The dealer wins.");
-  //   numOfHands++;
-  // }
-  //
-  // public void declareWinnerOneBust(){
-  //   System.out.println("Oh well, you busted. The dealer wins.");
-  //   numOfHands++;
-  //
-  // }
-  //
-  // public void declareWinner(){
-  //   int dealerValue = dealer.getValue();
-  //   int maxHandValue = 0;
-  //   int maxHandHolder = 0;
-  //   for(int i = 0; i < hands.size(); i++){
-  //     Hand temp = hands.get(i);
-  //     int value = temp.getValue();
-  //     if (value > maxHandValue){
-  //       maxHandValue = value;
-  //       maxHandHolder= i+1;
-  //     }
-  //   }
-  //   if(maxHandValue < dealerValue){
-  //     System.out.println("Oh well, the dealer wins.");
-  //   }
-  //   idealHandf(maxHandValue == dealerValue){
-  //     System.out.println("Not bad, you pushed.");
-  //   }
-  //   if(maxHandValue > dealerValue){
-  //     System.out.println("Great job, player "+ maxHandHolder + " won.");
-  //   }
-  //   numOfHands++;
-  // }
   public void dealerMove(){
     dealer.dealHand(deck);
     dealer.displayCards();
@@ -126,16 +91,13 @@ public class Game{
     }
     dealersNum = dealer.getValue();
   }
-  public void nextTurn(){
-    System.out.println("Alright. Ready to play again?");
-    System.out.println("Let's go!");
-  }
   public String getMove(){
     System.out.println("Please enter your move. Either hit or stand: ");
     String s = in.nextLine();
     return s;
   }
   public void startGame(){
+    deck.shuffle();
     System.out.println("Welcome to the casino!");
     System.out.println("Today you will be playing Blackjack.");
     System.out.println("The rules of blackjack are pretty simple: ");
@@ -148,6 +110,28 @@ public class Game{
     int buyIn = Integer.parseInt(next);
     for(int i = 0; i < numOfHands; i++){
       hands.add(new Hand(i+1,buyIn));
+    }
+  }
+  public void reset(){
+    deck.shuffle();
+    dealer.removeCards();
+    System.out.println("Would you like to play again?");
+    String s = in.nextLine();
+    if(s.equals("yes")){
+      for(int i = 0; i < hands.size(); i++){
+        Hand hand = hands.get(i);
+        if(hand.getChips() <= 0){
+          System.out.println("Oh well, player " + (i+1) + " is bankrupt. They have to leave the table");
+        }
+        else{
+          hand.removeCards();
+          hand.setBust(false);
+          hand.setMoves(true);
+        }
+      }
+    }
+    else{
+      System.out.println("Thanks for playing!");
     }
   }
 }
