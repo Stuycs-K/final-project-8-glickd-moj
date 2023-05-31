@@ -13,10 +13,31 @@ public class Game{
     showPrompts();
     for(int i = 0; i < hands.size(); i++){
       Hand hand  = hands.get(i);
+      System.out.println("Ok player " + (i+1) + ". How much would you like to bet?");
+      playerBet(hand);
+      playerMove(hand);
+    }
+    System.out.println("Alright. Enough betting. Time to play.");
+    for(int i = 0; i < hands.size(); i++){
+      Hand hand  = hands.get(i);
       playerMove(hand);
     }
     determineWinner();
     reset();
+  }
+
+  public void playerBet(Hand hand){
+    String next = in.nextLine();
+    int bet = Integer.parseInt(next);
+    if(bet > hand.getChips()){
+      System.out.println("You don't have that much money... You only have " + hand.getChips() + " chips.");
+      System.out.println("Please try again.");
+      playerBet(hand);
+    }
+    else{
+      hand.setBet(bet);
+      System.out.println("Alright, you bet " + hand.getBet() + " chips. Good luck.");
+    }
   }
 
   public void determineWinner(){

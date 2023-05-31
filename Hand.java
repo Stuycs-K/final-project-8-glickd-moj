@@ -4,6 +4,7 @@ public class Hand{
   private boolean hasMoves = true;
   private boolean bust = false;
   private int chips = 0;
+  private int bet;
   private String playerNum;
   public Hand(int i, int chip){
     hasMoves = true;
@@ -15,6 +16,14 @@ public class Hand{
   }
   public void removeCards(){
     hand.clear();
+  }
+
+  public void setBet(int x){
+    bet = x;
+  }
+
+  public int getBet(){
+    return bet;
   }
 
   public void setBust(boolean x){
