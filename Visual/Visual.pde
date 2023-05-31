@@ -49,6 +49,8 @@ void showCard(int player, int layer){ //add image parameter
     translate(-x,-y);
 }
 void draw(){
+  Deck test = new Deck();
+  test.deal().seeImage();
   showCard(1, 0);
   showCard(3, 1);
   showCard(3, 2);
