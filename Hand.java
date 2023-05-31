@@ -14,6 +14,9 @@ public class Hand{
       playerNum = "dealer";
     }
   }
+  public String getPlayer(){
+    return playerNum;
+  }
   public void removeCards(){
     hand.clear();
   }
@@ -31,6 +34,10 @@ public class Hand{
   }
   public int getChips(){
     return chips;
+  }
+
+  public void setChips(int x){
+    chips = x;
   }
   public void setMoves(boolean x){
     hasMoves =x;
@@ -88,7 +95,7 @@ public class Hand{
   }
 
   public boolean hasMoves(){
-    if(getValue() >= 21){
+    if(getValue() > 21){
       hasMoves = false;
       bust = true;
     }

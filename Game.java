@@ -13,9 +13,8 @@ public class Game{
     showPrompts();
     for(int i = 0; i < hands.size(); i++){
       Hand hand  = hands.get(i);
-      System.out.println("Ok player " + (i+1) + ". How much would you like to bet?");
+      System.out.println("Ok player " + hand.getPlayer() + ". How much would you like to bet?");
       playerBet(hand);
-      playerMove(hand);
     }
     System.out.println("Alright. Enough betting. Time to play.");
     for(int i = 0; i < hands.size(); i++){
@@ -51,7 +50,10 @@ public class Game{
     for(int i = 0; i < hands.size(); i++){
       Hand hand = hands.get(i);
       if(hand.getValue() > 21){
-        System.out.println("Oh well.. Player " + (i+1) + " busted.");
+        System.out.println("Oh well.. Player " + hand.getPlayer() + " busted.");
+        int chips = hand.getChips();
+        hand.setChips(chips-hand.getBet());
+        System.out.println("They lost " + hand.getBet() + " chips and now have " + hand.getChips() + " chips.");
       }
       else{
         dealerNeeds= true;
@@ -62,19 +64,28 @@ public class Game{
     for(int i = 0; i < hands.size(); i++){
       Hand hand = hands.get(i);
       if(hand.getValue()==21 && hand.numOfCards() == 2){
-        System.out.println("Well done! Player " + (i+1) + " wins!! Blackjack!");
+        System.out.println("Well done! Player " + hand.getPlayer() + " wins!! Blackjack!");
+        int chips = hand.getChips();
+        hand.setChips(chips+hand.getBet());
+        System.out.println("They won " + hand.getBet() + " chips and now have " + hand.getChips() + " chips.");
       }
       else if(hand.isBust()){
 
       }
       else if(hand.getValue() > dealersNum || dealer.isBust()){
-        System.out.println("Well done! Player " + (i+1) + " wins. BOOM");
+        System.out.println("Well done! Player " + hand.getPlayer() + " wins. BOOM");
+        int chips = hand.getChips();
+        hand.setChips(chips+hand.getBet());
+        System.out.println("They won " + hand.getBet() + " chips and now have " + hand.getChips() + " chips.");
       }
       else if(hand.getValue() == dealer.getValue()){
-        System.out.println("Not bad! Player " + (i+1) + " pushes.");
+        System.out.println("Not bad! Player " + hand.getPlayer() + " pushes.");
       }
       else{
-        System.out.println("Oh well... Player " + (i+1) + " lost.");
+        System.out.println("Oh well... Player " + hand.getPlayer() + " lost.");
+        int chips = hand.getChips();
+        hand.setChips(chips-hand.getBet());
+        System.out.println("They lost " + hand.getBet() + " chips and now have " + hand.getChips() +  " chips.");
       }
     }
   }
@@ -133,13 +144,17 @@ public class Game{
   public void reset(){
     deck.shuffle();
     dealer.removeCards();
+    dealer.setBust(false);
+    dealer.setMoves(true);
     System.out.println("Would you like to play again?");
     String s = in.nextLine();
     if(s.equals("yes")){
       for(int i = 0; i < hands.size(); i++){
         Hand hand = hands.get(i);
         if(hand.getChips() <= 0){
-          System.out.println("Oh well, player " + (i+1) + " is bankrupt. They have to leave the table");
+          System.out.println("Oh well, player " + hand.getPlayer() + " is bankrupt. They have to leave the table");
+          hands.remove(hand);
+          i--;
         }
         else{
           hand.removeCards();
