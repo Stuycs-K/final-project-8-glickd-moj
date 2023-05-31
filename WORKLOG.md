@@ -33,6 +33,14 @@ fixed calculating winner. Need to make reset.
 
 made a reset for the game. Also debugged some dealer issues and made prompts more clear. Ready to add chips.
 
+### 5/27 - 5/30
+
+fixed debugging issues with resetting including problems with player numbering and reseting dealer variables
+
+### 5/31
+
+added chips and betting to game. Ready for demo
+
 
 ## JOCELYN MO
 
