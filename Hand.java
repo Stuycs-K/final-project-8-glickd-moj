@@ -3,13 +3,44 @@ public class Hand{
   private ArrayList<Card> hand = new ArrayList<Card>();
   private boolean hasMoves = true;
   private boolean bust = false;
+  private int chips = 0;
+  private int bet;
   private String playerNum;
-  public Hand(int i){
+  public Hand(int i, int chip){
     hasMoves = true;
+    chips = chip;
     playerNum = "" + i;
     if(i == 0){
       playerNum = "dealer";
     }
+  }
+  public String getPlayer(){
+    return playerNum;
+  }
+  public void removeCards(){
+    hand.clear();
+  }
+
+  public void setBet(int x){
+    bet = x;
+  }
+
+  public int getBet(){
+    return bet;
+  }
+
+  public void setBust(boolean x){
+    bust = x;
+  }
+  public int getChips(){
+    return chips;
+  }
+
+  public void setChips(int x){
+    chips = x;
+  }
+  public void setMoves(boolean x){
+    hasMoves =x;
   }
   public void dealHand(Deck deck){
     Card card1 = deck.deal();
@@ -64,11 +95,15 @@ public class Hand{
   }
 
   public boolean hasMoves(){
-    if(getValue() >= 21){
+    if(getValue() > 21){
       hasMoves = false;
       bust = true;
     }
     return hasMoves;
+  }
+
+  public int numOfCards(){
+    return hand.size();
   }
 
   public int getValue(){

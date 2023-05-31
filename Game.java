@@ -6,83 +6,110 @@ public class Game{
   public ArrayList<Card> dealerHand = new ArrayList<Card>();
   public Scanner in = new Scanner(System.in);
   public Deck deck = new Deck();
-  public Hand dealer = new Hand(0);
+  public Hand dealer = new Hand(0,1);
+  public boolean dealerNeeds= false;
+  public int dealersNum;
   public void game(){
-    boolean notAllBust = false;
+    showPrompts();
+    for(int i = 0; i < hands.size(); i++){
+      Hand hand  = hands.get(i);
+      System.out.println("Ok player " + hand.getPlayer() + ". How much would you like to bet?");
+      playerBet(hand);
+    }
+    System.out.println("Alright. Enough betting. Time to play.");
+    for(int i = 0; i < hands.size(); i++){
+      Hand hand  = hands.get(i);
+      playerMove(hand);
+    }
+    determineWinner();
+    reset();
+  }
+
+  public void playerBet(Hand hand){
+    String next = in.nextLine();
+    int bet = Integer.parseInt(next);
+    if(bet > hand.getChips()){
+      System.out.println("You don't have that much money... You only have " + hand.getChips() + " chips.");
+      System.out.println("Please try again.");
+      playerBet(hand);
+    }
+    else{
+      hand.setBet(bet);
+      System.out.println("Alright, you bet " + hand.getBet() + " chips. Good luck.");
+    }
+  }
+
+  public void determineWinner(){
+    declareBust();
+    if(dealerNeeds){
+      dealerMove();
+    }
+    declareWinner();
+    }
+  public void declareBust(){
+    for(int i = 0; i < hands.size(); i++){
+      Hand hand = hands.get(i);
+      if(hand.getValue() > 21){
+        System.out.println("Oh well.. Player " + hand.getPlayer() + " busted.");
+        int chips = hand.getChips();
+        hand.setChips(chips-hand.getBet());
+        System.out.println("They lost " + hand.getBet() + " chips and now have " + hand.getChips() + " chips.");
+      }
+      else{
+        dealerNeeds= true;
+      }
+    }
+  }
+  public void declareWinner(){
+    for(int i = 0; i < hands.size(); i++){
+      Hand hand = hands.get(i);
+      if(hand.getValue()==21 && hand.numOfCards() == 2){
+        System.out.println("Well done! Player " + hand.getPlayer() + " wins!! Blackjack!");
+        int chips = hand.getChips();
+        hand.setChips(chips+hand.getBet());
+        System.out.println("They won " + hand.getBet() + " chips and now have " + hand.getChips() + " chips.");
+      }
+      else if(hand.isBust()){
+
+      }
+      else if(hand.getValue() > dealersNum || dealer.isBust()){
+        System.out.println("Well done! Player " + hand.getPlayer() + " wins. BOOM");
+        int chips = hand.getChips();
+        hand.setChips(chips+hand.getBet());
+        System.out.println("They won " + hand.getBet() + " chips and now have " + hand.getChips() + " chips.");
+      }
+      else if(hand.getValue() == dealer.getValue()){
+        System.out.println("Not bad! Player " + hand.getPlayer() + " pushes.");
+      }
+      else{
+        System.out.println("Oh well... Player " + hand.getPlayer() + " lost.");
+        int chips = hand.getChips();
+        hand.setChips(chips-hand.getBet());
+        System.out.println("They lost " + hand.getBet() + " chips and now have " + hand.getChips() +  " chips.");
+      }
+    }
+  }
+  public void playerMove(Hand hand){
+    hand.dealHand(deck);
+    hand.displayCards();
+    while(hand.hasMoves()){
+      String move = getMove();
+      if(move.equals("hit")){
+        hand.hit(deck);
+      }
+      if(move.equals("stand")){
+        hand.stand();
+      }
+    }
+  }
+  public void showPrompts(){
     if(numOfHands == 1){
       startGame();
     }
-    else{
-      nextTurn();
-    }
-    deck.shuffle();
-    for(int i = 0; i < hands.size(); i++){
-      Hand hand  = hands.get(i);
-      hand.dealHand(deck);
-      hand.displayCards();
-      while(hand.hasMoves()){
-        String move = getMove();
-        if(move.equals("hit")){
-          hand.hit(deck);
-        }
-        if(move.equals("stand")){
-          hand.stand();
-        }
-      }
-      if(!hand.isBust()){
-        notAllBust = true;
-      }
-    }
-    if(notAllBust){
-      dealerMove();
-      declareWinner();
-    }
-    else{
-      if(hands.size() > 1){
-        declareWinnerAllBust();
-      }
-      else{
-        declareWinnerOneBust();
-      }
-    }
-  }
-
-  public void declareWinnerAllBust(){
-    System.out.println("Oh well, everyone busted. The dealer wins.");
-    numOfHands++;
-  }
-
-  public void declareWinnerOneBust(){
-    System.out.println("Oh well, you busted. The dealer wins.");
-    numOfHands++;
-
-  }
-
-  public void declareWinner(){
-    int dealerValue = dealer.getValue();
-    int maxHandValue = 0;
-    int maxHandHolder = 0;
-    for(int i = 0; i < hands.size(); i++){
-      Hand temp = hands.get(i);
-      int value = temp.getValue();
-      if (value > maxHandValue){
-        maxHandValue = value;
-        maxHandHolder= i+1;
-      }
-    }
-    if(maxHandValue < dealerValue){
-      System.out.println("Oh well, the dealer wins.");
-    }
-    if(maxHandValue == dealerValue){
-      System.out.println("Not bad, you pushed.");
-    }
-    if(maxHandValue > dealerValue){
-      System.out.println("Great job, player "+ maxHandHolder + " won.");
-    }
-    numOfHands++;
   }
   public void dealerMove(){
     dealer.dealHand(deck);
+    dealer.displayCards();
     while(dealer.hasMoves()){
       if(dealer.getValue() <= 16){
         dealer.hit(deck);
@@ -91,10 +118,7 @@ public class Game{
         dealer.stand();
       }
     }
-  }
-  public void nextTurn(){
-    System.out.println("Alright. Ready to play again?");
-    System.out.println("Let's go!");
+    dealersNum = dealer.getValue();
   }
   public String getMove(){
     System.out.println("Please enter your move. Either hit or stand: ");
@@ -102,6 +126,7 @@ public class Game{
     return s;
   }
   public void startGame(){
+    deck.shuffle();
     System.out.println("Welcome to the casino!");
     System.out.println("Today you will be playing Blackjack.");
     System.out.println("The rules of blackjack are pretty simple: ");
@@ -109,8 +134,39 @@ public class Game{
     String s = in.nextLine();
     int j = Integer.parseInt(s);
     numOfHands = j;
+    System.out.println("How many chips does each player have? ");
+    String next = in.nextLine();
+    int buyIn = Integer.parseInt(next);
     for(int i = 0; i < numOfHands; i++){
-      hands.add(new Hand(i+1));
+      hands.add(new Hand(i+1,buyIn));
+    }
+  }
+  public void reset(){
+    deck.shuffle();
+    dealer.removeCards();
+    dealer.setBust(false);
+    dealer.setMoves(true);
+    System.out.println("Would you like to play again?");
+    String s = in.nextLine();
+    if(s.equals("yes")){
+      for(int i = 0; i < hands.size(); i++){
+        Hand hand = hands.get(i);
+        if(hand.getChips() <= 0){
+          System.out.println("Oh well, player " + hand.getPlayer() + " is bankrupt. They have to leave the table");
+          hands.remove(hand);
+          i--;
+        }
+        else{
+          hand.removeCards();
+          hand.setBust(false);
+          hand.setMoves(true);
+        }
+      }
+      numOfHands++;
+      game();
+    }
+    else{
+      System.out.println("Thanks for playing!");
     }
   }
 }
