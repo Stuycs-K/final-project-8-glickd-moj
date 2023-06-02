@@ -3,9 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 public class Deck {
   private ArrayList<Card> deck;
-  private ArrayList<PImage> deckImg = new ArrayList<PImage>(54);
-
-  
+  private ArrayList<PImage> deckImg = new ArrayList<PImage>(52);
 
   public void loadImages() {
     File folder = new File("C:\\Users\\jocel\\Downloads\\JocelynMo\\APCS\\final-project-8-glickd-moj\\Visual\\PNG-cards-1.3");
@@ -14,17 +12,10 @@ public class Deck {
     //String test = Arrays.toString(pngs);
     //System.out.println(test); //CHECK ALL OF THEM ARE IN THE ARRAY YES
     for (int i = 0; i < pngs.length; i++) {
-      System.out.println(i);
       String path = pngs[i].getAbsolutePath();
-  System.out.println(path);
       PImage img = loadImage(path);
-      if (deckImg.add(img)){
-        System.out.println("added");
-      }
-      else{
-        System.out.println("ERROR");
-      }  
-  }
+      deckImg.add(img);
+    }
   }
 
 
