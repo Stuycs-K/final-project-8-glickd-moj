@@ -7,6 +7,10 @@ public class Card{
     image = img;
   }
   
+  public PImage getImage(){
+    return image;
+  }
+  
   public void seeImage(){
     image(image, 0, 0);
   }
