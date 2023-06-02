@@ -3,22 +3,28 @@ import java.io.File;
 import java.io.FileNotFoundException;
 public class Deck {
   private ArrayList<Card> deck;
-  private ArrayList<PImage> deckImg;
+  private ArrayList<PImage> deckImg = new ArrayList<PImage>(54);
 
   
 
   public void loadImages() {
-    File folder = new File("/Visual/PNG-cards-1.3");
-    System.out.println(folder.exists());
-  File[] pngs = folder.listFiles();
-  String test = Arrays.toString(pngs);
-  System.out.println(test);
+    File folder = new File("C:\\Users\\jocel\\Downloads\\JocelynMo\\APCS\\final-project-8-glickd-moj\\Visual\\PNG-cards-1.3");
+    //System.out.println(folder.exists()); IT DOES EXIST YAYAY
+    File[] pngs = folder.listFiles();
+    //String test = Arrays.toString(pngs);
+    //System.out.println(test); //CHECK ALL OF THEM ARE IN THE ARRAY YES
     for (int i = 0; i < pngs.length; i++) {
+      System.out.println(i);
       String path = pngs[i].getAbsolutePath();
-
+  System.out.println(path);
       PImage img = loadImage(path);
-      deckImg.add(img);
-    }
+      if (deckImg.add(img)){
+        System.out.println("added");
+      }
+      else{
+        System.out.println("ERROR");
+      }  
+  }
   }
 
 

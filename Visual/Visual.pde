@@ -56,6 +56,7 @@ void draw(){
   test.deal().seeImage();
   }
   catch (Exception ex){
+    ex.printStackTrace();
   }
   showCard(1, 0);
   showCard(3, 1);
