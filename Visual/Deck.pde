@@ -1,12 +1,18 @@
 import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 public class Deck {
   private ArrayList<Card> deck;
   private ArrayList<PImage> deckImg;
-  File folder = new File("PNG-cards-1.3");
-  File[] pngs = folder.listFiles();
+
+  
 
   public void loadImages() {
-    System.out.println(pngs.length);
+    File folder = new File("/Visual/PNG-cards-1.3");
+    System.out.println(folder.exists());
+  File[] pngs = folder.listFiles();
+  String test = Arrays.toString(pngs);
+  System.out.println(test);
     for (int i = 0; i < pngs.length; i++) {
       String path = pngs[i].getAbsolutePath();
 

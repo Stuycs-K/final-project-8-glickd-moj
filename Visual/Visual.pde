@@ -1,4 +1,6 @@
 import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 static int WIDTH = 1000;
 static int HEIGHT = 1000;
 static int boardW = WIDTH*7/8;
@@ -49,8 +51,12 @@ void showCard(int player, int layer){ //add image parameter
     translate(-x,-y);
 }
 void draw(){
+  try{
   Deck test = new Deck();
   test.deal().seeImage();
+  }
+  catch (Exception ex){
+  }
   showCard(1, 0);
   showCard(3, 1);
   showCard(3, 2);
