@@ -58,7 +58,7 @@ pushed classes to main and combined with game structure, starting processing pla
 
 ### 5/25
 
-making the blackjack table, need trig to draw placements of the cards in a semi circle
+(all in processing >> unless specified otherwise) making the blackjack table, need trig to draw placements of the cards in a semi circle
 
 ### 5/26
 
@@ -75,3 +75,11 @@ fixed translation and rotation problem, the seven placeholders for cards display
 ### 5/30
 
 made up method to print cards in the placeholders and started code for multiple cards in a hand
+
+### 5/31
+
+added card images to card and deck classes
+
+### 6/1
+
+card images are now accessible and displayable in correct spots
