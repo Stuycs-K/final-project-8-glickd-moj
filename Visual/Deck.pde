@@ -6,8 +6,8 @@ public class Deck {
   private ArrayList<PImage> deckImg = new ArrayList<PImage>(52);
 
   public void loadImages() {
-    File folder = new File("C:\\Users\\jocel\\Downloads\\JocelynMo\\APCS\\final-project-8-glickd-moj\\Visual\\PNG-cards-1.3");
-    //System.out.println(folder.exists()); IT DOES EXIST YAYAY
+    File folder = new File("Visual\\PNG-cards-1.3");
+    System.out.println(folder.exists()); //IT DOESNT EXIST NOO a;(
     File[] pngs = folder.listFiles();
     //String test = Arrays.toString(pngs);
     //System.out.println(test); //CHECK ALL OF THEM ARE IN THE ARRAY YES
