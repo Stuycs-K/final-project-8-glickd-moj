@@ -43,6 +43,7 @@ void showCard(int player, int layer, PImage card){ //add image parameter
 void draw(){
   try{
   Deck test = new Deck();
+  test.shuffle();
   showCard(2,0,test.deal().getImage());
   showCard(2,1,test.deal().getImage());
   showCard(2,2,test.deal().getImage());

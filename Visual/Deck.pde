@@ -6,11 +6,11 @@ public class Deck {
   private ArrayList<PImage> deckImg = new ArrayList<PImage>(52);
 
   public void loadImages() {
-    File folder = new File("Visual\\PNG-cards-1.3");
-    System.out.println(folder.exists()); //IT DOESNT EXIST NOO a;(
+    File folder = new File(dataPath(""));
+    //System.out.println(folder.exists());
     File[] pngs = folder.listFiles();
     //String test = Arrays.toString(pngs);
-    //System.out.println(test); //CHECK ALL OF THEM ARE IN THE ARRAY YES
+    //System.out.println(test);
     for (int i = 0; i < pngs.length; i++) {
       String path = pngs[i].getAbsolutePath();
       PImage img = loadImage(path);
