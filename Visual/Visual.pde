@@ -46,7 +46,8 @@ void draw(){
   test.shuffle();
   showCard(2,0,test.deal().getImage());
   showCard(2,1,test.deal().getImage());
-  showCard(2,6,test.deal().getImage());
+
+  showCard(2,2,test.deal().getImage());
   }
   catch (Exception ex){
     ex.printStackTrace();
