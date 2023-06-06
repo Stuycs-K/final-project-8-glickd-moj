@@ -38,14 +38,6 @@ public class Deck {
     return deck;
   }
 
-  public void printDeck() {
-    String ans = "[";
-    for (int i = 0; i < size(); i++) {
-      ans += deck.get(i).getValue() + " ";
-    }
-    System.out.println(ans + "]");
-  }
-
   public Card deal() {
     return deck.remove(0);
   }
