@@ -83,3 +83,11 @@ added card images to card and deck classes
 ### 6/1
 
 card images are now accessible and displayable in correct spots
+
+### 6/2-6/4
+
+rough patch trying to figure out how to access the image folders from varying computers
+
+### 6/5
+
+moved all images to data directory (thanks Mr. K), figured out relative path for data directory, should work from all users
