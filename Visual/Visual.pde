@@ -31,6 +31,8 @@ void setup(){
    }  
    Game game = new Game();
     game.game();
+    textSize(128);
+    text(game.getSaved(),10,10);
 }
 void showCard(int player, int layer, PImage card){ //add image parameter
     fill(0);

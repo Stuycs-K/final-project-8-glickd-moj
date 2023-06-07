@@ -168,5 +168,24 @@ public class Game{
     else{
       System.out.println("Thanks for playing!");
     }
+  }  private String saved = "none";
+  private String typing;
+  void keyPressed(){
+    if(key == '\n'){
+      saved = typing;
+      typing = "";
+    }
+    else if (key == BACKSPACE && typing.length() > 0){
+      typing = typing.substring(0,typing.length()-1);
+    }
+    else{
+      typing = typing + key;
+    }
+  }
+  String getSaved(){
+    return saved;
+  }
+  String getTyping(){
+    return typing;
   }
 }
