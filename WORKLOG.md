@@ -91,3 +91,7 @@ rough patch trying to figure out how to access the image folders from varying co
 ### 6/5
 
 moved all images to data directory (thanks Mr. K), figured out relative path for data directory, should work from all users
+
+### 6/6
+
+merged processing with main, now starting to adapt the game mechanism code for processing
