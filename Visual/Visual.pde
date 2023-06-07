@@ -23,36 +23,45 @@ void setup(){
     float x = placeholders[2*i-2];
     float y = placeholders[2*i-1];
     stroke(255);
+    pushMatrix();
     translate(x,y);
     rotate(theta[i-1]-HALF_PI);
     rect(-20, 0, 40, 60);
-    rotate(HALF_PI-theta[i-1]);
-    translate(-x,-y);
+    popMatrix();
    }  
-   Game game = new Game();
-    game.game();
+   //Game game = new Game();
+    //game.game();
+    displayText("testing");
 }
 void showCard(int player, int layer, PImage card){ //add image parameter
     fill(0);
     float x = placeholders[2*player-2] + layer*(18*cos(theta[player-1]));
     float y = placeholders[2*player-1] + layer*(18*sin(theta[player-1]));
+    pushMatrix();
     translate(x, y);
     rotate(theta[player-1]-HALF_PI);
     image(card, -20, 0, 40, 60);
-    rotate(HALF_PI - theta[player-1]);
-    translate(-x,-y);
+    popMatrix();
+}
+void displayText(String text){
+  fill(255);
+  stroke(0);
+  rect(70, 90, WIDTH*2/3, HEIGHT*1/10);
+  fill(0);
+  text(text, 80, 120); 
 }
 void draw(){
-  //try{
-  //Deck test = new Deck();
-  //test.shuffle();
-  //showCard(2,0,test.deal().getImage());
-  //showCard(2,1,test.deal().getImage());
+//  try{
+//  Deck test = new Deck();
+//  test.shuffle();
+//  showCard(2,0,test.deal().getImage());
+//  showCard(2,1,test.deal().getImage());
 
-  //showCard(2,2,test.deal().getImage());
-  //}
-  //catch (Exception ex){
-  //  ex.printStackTrace();
-  //}
+//  showCard(2,2,test.deal().getImage());
+//  //displayText("testing");
+//  }
+//  catch (Exception ex){
+//    ex.printStackTrace();
+//  }
   
 }
