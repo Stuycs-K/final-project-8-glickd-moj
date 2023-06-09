@@ -10,12 +10,22 @@ static int players = 3; //change according to size of users arraylist
 static float increment = PI/8;
 static float[] placeholders = new float[14];
 static float[] theta = new float[7];
+PFont prompt;
 
 void setup(){
   
   size(1000,1000);
+  prompt = createFont("Poppins-Black.ttf", 32);
+  
+  //fill(165,42,42);
+  //stroke(165,42,42);
+  //arc(WIDTH/2, HEIGHT/4-20, boardW+40, 2*boardH+85, 0, PI);
   fill(21,68,6);
-  arc(WIDTH/2, HEIGHT/4, boardW, 2*boardH, 0, PI);
+  strokeWeight(30);
+  stroke(70,42,14);
+  arc(WIDTH/2, HEIGHT/4, boardW, 2*boardH, 0, PI, CHORD);
+  strokeWeight(1);
+
   for (int i = 1; i <8; i++){
     theta[i-1] = PI - (increment*i);
     placeholders[2*i-2] = (WIDTH/2) + (rad)*cos(theta[i-1]);
@@ -44,11 +54,11 @@ void showCard(int player, int layer, PImage card){ //add image parameter
     popMatrix();
 }
 void displayText(String text){
-  fill(255);
-  stroke(0);
-  rect(70, 90, WIDTH*2/3, HEIGHT*1/10);
-  fill(0);
-  text(text, 80, 120); 
+  //stroke(0);
+  //rect(70, 90, WIDTH*2/3, HEIGHT*1/10);
+  //fill(0);
+  textFont(prompt);
+  text(text, 50, 120); 
 }
 void draw(){
 //  try{
