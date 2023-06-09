@@ -13,10 +13,10 @@ public class Game{
     showPrompts();
     for(int i = 0; i < hands.size(); i++){
       Hand hand  = hands.get(i);
-      System.out.println("Ok player " + hand.getPlayer() + ". How much would you like to bet?");
+      displayText("Ok player " + hand.getPlayer() + ". How much would you like to bet?");
       playerBet(hand);
     }
-    System.out.println("Alright. Enough betting. Time to play.");
+    displayText("Alright. Enough betting. Time to play.");
     for(int i = 0; i < hands.size(); i++){
       Hand hand  = hands.get(i);
       playerMove(hand,i);
@@ -29,13 +29,13 @@ public class Game{
     String next = in.nextLine();
     int bet = Integer.parseInt(next);
     if(bet > hand.getChips()){
-      System.out.println("You don't have that much money... You only have " + hand.getChips() + " chips.");
-      System.out.println("Please try again.");
+      displayText("You don't have that much money... You only have " + hand.getChips() + " chips.");
+      displayText("Please try again.");
       playerBet(hand);
     }
     else{
       hand.setBet(bet);
-      System.out.println("Alright, you bet " + hand.getBet() + " chips. Good luck.");
+      displayText("Alright, you bet " + hand.getBet() + " chips. Good luck.");
     }
   }
 
@@ -50,10 +50,10 @@ public class Game{
     for(int i = 0; i < hands.size(); i++){
       Hand hand = hands.get(i);
       if(hand.getValue() > 21){
-        System.out.println("Oh well.. Player " + hand.getPlayer() + " busted.");
+        displayText("Oh well.. Player " + hand.getPlayer() + " busted.");
         int chips = hand.getChips();
         hand.setChips(chips-hand.getBet());
-        System.out.println("They lost " + hand.getBet() + " chips and now have " + hand.getChips() + " chips.");
+        displayText("They lost " + hand.getBet() + " chips and now have " + hand.getChips() + " chips.");
       }
       else{
         dealerNeeds= true;
@@ -64,28 +64,28 @@ public class Game{
     for(int i = 0; i < hands.size(); i++){
       Hand hand = hands.get(i);
       if(hand.getValue()==21 && hand.numOfCards() == 2){
-        System.out.println("Well done! Player " + hand.getPlayer() + " wins!! Blackjack!");
+        displayText("Well done! Player " + hand.getPlayer() + " wins!! Blackjack!");
         int chips = hand.getChips();
         hand.setChips(chips+hand.getBet());
-        System.out.println("They won " + hand.getBet() + " chips and now have " + hand.getChips() + " chips.");
+        displayText("They won " + hand.getBet() + " chips and now have " + hand.getChips() + " chips.");
       }
       else if(hand.isBust()){
 
       }
       else if(hand.getValue() > dealersNum || dealer.isBust()){
-        System.out.println("Well done! Player " + hand.getPlayer() + " wins. BOOM");
+        displayText("Well done! Player " + hand.getPlayer() + " wins. BOOM");
         int chips = hand.getChips();
         hand.setChips(chips+hand.getBet());
-        System.out.println("They won " + hand.getBet() + " chips and now have " + hand.getChips() + " chips.");
+        displayText("They won " + hand.getBet() + " chips and now have " + hand.getChips() + " chips.");
       }
       else if(hand.getValue() == dealer.getValue()){
-        System.out.println("Not bad! Player " + hand.getPlayer() + " pushes.");
+        displayText("Not bad! Player " + hand.getPlayer() + " pushes.");
       }
       else{
-        System.out.println("Oh well... Player " + hand.getPlayer() + " lost.");
+        displayText("Oh well... Player " + hand.getPlayer() + " lost.");
         int chips = hand.getChips();
         hand.setChips(chips-hand.getBet());
-        System.out.println("They lost " + hand.getBet() + " chips and now have " + hand.getChips() +  " chips.");
+        displayText("They lost " + hand.getBet() + " chips and now have " + hand.getChips() +  " chips.");
       }
     }
   }
@@ -121,20 +121,20 @@ public class Game{
     dealersNum = dealer.getValue();
   }
   public String getMove(){
-    System.out.println("Please enter your move. Either hit or stand: ");
+    displayText("Please enter your move. Either hit or stand: ");
     String s = in.nextLine();
     return s;
   }
   public void startGame(){
     deck.shuffle();
-    System.out.println("Welcome to the casino!");
-    System.out.println("Today you will be playing Blackjack.");
-    System.out.println("The rules of blackjack are pretty simple: ");
-    System.out.println("How many players would you like in the game?  ");
+    displayText("Welcome to the casino!");
+    displayText("Today you will be playing Blackjack.");
+    displayText("The rules of blackjack are pretty simple: ");
+    displayText("How many players would you like in the game?  ");
     String s = in.nextLine();
     int j = Integer.parseInt(s);
     numOfHands = j;
-    System.out.println("How many chips does each player have? ");
+    displayText("How many chips does each player have? ");
     String next = in.nextLine();
     int buyIn = Integer.parseInt(next);
     for(int i = 0; i < numOfHands; i++){
@@ -146,13 +146,13 @@ public class Game{
     dealer.removeCards();
     dealer.setBust(false);
     dealer.setMoves(true);
-    System.out.println("Would you like to play again?");
+    displayText("Would you like to play again?");
     String s = in.nextLine();
     if(s.equals("yes")){
       for(int i = 0; i < hands.size(); i++){
         Hand hand = hands.get(i);
         if(hand.getChips() <= 0){
-          System.out.println("Oh well, player " + hand.getPlayer() + " is bankrupt. They have to leave the table");
+          displayText("Oh well, player " + hand.getPlayer() + " is bankrupt. They have to leave the table");
           hands.remove(hand);
           i--;
         }
@@ -166,7 +166,7 @@ public class Game{
       game();
     }
     else{
-      System.out.println("Thanks for playing!");
+      displayText("Thanks for playing!");
     }
   }
 }
