@@ -10,7 +10,21 @@ static int players = 3; //change according to size of users arraylist
 static float increment = PI/8;
 static float[] placeholders = new float[14];
 static float[] theta = new float[7];
+String current = "";
+String saved;
 
+void keyPressed(){
+  if(key == '\n'){
+    saved = current;
+    current = "";
+  }
+  else if(key == BACKSPACE){
+    current = current.substring(0, current.length()-1);
+  }
+  else{
+    current += key;
+  }
+}
 void setup(){
   
   size(1000,1000);
@@ -29,8 +43,8 @@ void setup(){
     rotate(HALF_PI-theta[i-1]);
     translate(-x,-y);
    }  
-   Game game = new Game();
-    game.game();
+   //Game game = new Game();
+    //game.game();
 }
 void showCard(int player, int layer, PImage card){ //add image parameter
     fill(0);
@@ -43,16 +57,17 @@ void showCard(int player, int layer, PImage card){ //add image parameter
     translate(-x,-y);
 }
 void draw(){
-  //try{
-  //Deck test = new Deck();
-  //test.shuffle();
-  //showCard(2,0,test.deal().getImage());
-  //showCard(2,1,test.deal().getImage());
+  try{
+  Deck test = new Deck();
+  test.shuffle();
+  showCard(2,0,test.deal().getImage());
+  showCard(2,1,test.deal().getImage());
 
-  //showCard(2,2,test.deal().getImage());
-  //}
-  //catch (Exception ex){
-  //  ex.printStackTrace();
-  //}
+  showCard(2,2,test.deal().getImage());
+  }
+  catch (Exception ex){
+    ex.printStackTrace();
+  }
+  System.out.println(current);
   
 }
