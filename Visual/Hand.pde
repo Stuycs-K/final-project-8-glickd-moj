@@ -67,12 +67,12 @@ public class Hand{
       showCard(j,i,hand.get(i).getImage());
     }
     if(getValue() <= 21){
-      System.out.println("The total value of player " + playerNum + "'s hand is " + getValue());
-      System.out.println();
+      displayText("The total value of player " + playerNum + "'s hand is " + getValue());
+      displayText("\n");
     }
     else{
-      System.out.println("Whoops, the hand is a bust.");
-      System.out.println();
+      displayText("Whoops, the hand is a bust.");
+      displayText("\n");
       bust = true;
     }
   }
