@@ -2,24 +2,13 @@ import java.util.*;
 
 public class Game{
   public int numOfHands = 1;
-  public ArrayList<Hand> hands;
-  public ArrayList<Card> dealerHand;
+  public ArrayList<Hand> hands = new ArrayList<Hand>();
+  public ArrayList<Card> dealerHand = new ArrayList<Card>();
   public Scanner in = new Scanner(System.in);
-<<<<<<< HEAD
-  public Deck deck;
-  public Hand dealer;
-  public Game(){
-    hands = new ArrayList<Hand>();
-    dealerHand  = new ArrayList<Card>();
-    deck = new Deck();
-    dealer = new Hand(0);
-  }
-=======
   public Deck deck = new Deck();
   public Hand dealer = new Hand(0,1);
   public boolean dealerNeeds= false;
   public int dealersNum;
->>>>>>> fd8eb266934642ad915dfab6b06ee10600a07b3d
   public void game(){
     showPrompts();
     for(int i = 0; i < hands.size(); i++){
@@ -30,7 +19,7 @@ public class Game{
     System.out.println("Alright. Enough betting. Time to play.");
     for(int i = 0; i < hands.size(); i++){
       Hand hand  = hands.get(i);
-      playerMove(hand);
+      playerMove(hand,i);
     }
     determineWinner();
     reset();
@@ -71,28 +60,6 @@ public class Game{
       }
     }
   }
-<<<<<<< HEAD
-  public void reset(){
-    System.out.println("Would you like to play again? ");
-    String s = in.nextLine();
-    if(s.equals("yes")){
-      Game game = new Game();
-      numOfHands++;
-      game.game();
-    }
-  }
-  public void declareWinnerAllBust(){
-    System.out.println("Oh well, everyone busted. The dealer wins.");
-    reset();
-  }
-
-  public void declareWinnerOneBust(){
-    System.out.println("Oh well, you busted. The dealer wins.");
-    reset();
-  }
-
-=======
->>>>>>> fd8eb266934642ad915dfab6b06ee10600a07b3d
   public void declareWinner(){
     for(int i = 0; i < hands.size(); i++){
       Hand hand = hands.get(i);
@@ -122,13 +89,13 @@ public class Game{
       }
     }
   }
-  public void playerMove(Hand hand){
+  public void playerMove(Hand hand, int integer){
     hand.dealHand(deck);
-    hand.displayCards();
+    hand.displayCards(integer);
     while(hand.hasMoves()){
       String move = getMove();
       if(move.equals("hit")){
-        hand.hit(deck);
+        hand.hit(deck, integer);
       }
       if(move.equals("stand")){
         hand.stand();
@@ -139,17 +106,13 @@ public class Game{
     if(numOfHands == 1){
       startGame();
     }
-<<<<<<< HEAD
-    reset();
-=======
->>>>>>> fd8eb266934642ad915dfab6b06ee10600a07b3d
   }
   public void dealerMove(){
     dealer.dealHand(deck);
-    dealer.displayCards();
+    dealer.displayCards(0);
     while(dealer.hasMoves()){
       if(dealer.getValue() <= 16){
-        dealer.hit(deck);
+        dealer.hit(deck,0);
       }
       else{
         dealer.stand();

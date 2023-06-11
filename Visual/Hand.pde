@@ -54,35 +54,18 @@ public class Hand{
   public boolean isBust(){
     return bust;
   }
-  public void hit(Deck deck){
+  public void hit(Deck deck, int i){
     hand.add(deck.deal());
     if(getValue() > 21){
       bust = true;
     }
-    displayCards();
+    displayCards(i);
   }
 
-  public void displayCards(){
-    System.out.println();
+  public void displayCards(int j){
     for(int i = 0; i < hand.size(); i++){
-      Card temp = hand.get(i);
-      if(temp.getValue() == 1){
-        System.out.print("ACE ");
-      }
-      else if(temp.getValue() == 11){
-        System.out.print("JACK ");
-      }
-      else if(temp.getValue() == 12){
-        System.out.print("QUEEN ");
-      }
-      else if(temp.getValue() == 13){
-        System.out.print("KING ");
-      }
-      else{
-        System.out.print(temp.getValue() + " ");
-      }
+      showCard(j,i,hand.get(i).getImage());
     }
-    System.out.println();
     if(getValue() <= 21){
       System.out.println("The total value of player " + playerNum + "'s hand is " + getValue());
       System.out.println();
