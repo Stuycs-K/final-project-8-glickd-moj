@@ -10,6 +10,29 @@ static int players = 3; //change according to size of users arraylist
 static float increment = PI/8;
 static float[] placeholders = new float[14];
 static float[] theta = new float[7];
+<<<<<<< HEAD
+String current = "";
+String saved;
+
+void keyPressed(){
+  if(key == '\n'){
+    saved = current;
+    current = "";
+  }
+  else if(key == BACKSPACE){
+    current = current.substring(0, current.length()-1);
+  }
+  else{
+    current += key;
+  }
+}
+void setup(){
+  
+  size(1000,1000);
+  fill(21,68,6);
+  arc(WIDTH/2, HEIGHT/4, boardW, 2*boardH, 0, PI);
+  for (int i = 1; i <8; i++){
+=======
 PFont prompt;
 
 void setup() {
@@ -28,6 +51,7 @@ void setup() {
   strokeWeight(1);
 
   for (int i = 1; i <8; i++) {
+>>>>>>> 12c6767e591b5b23826c70416e18549e1f756556
     theta[i-1] = PI - (increment*i);
     placeholders[2*i-2] = (WIDTH/2) + (rad)*cos(theta[i-1]);
     placeholders[2*i-1] = (HEIGHT/4) + (rad)*sin(theta[i-1]);
@@ -38,12 +62,20 @@ void setup() {
     translate(x, y);
     rotate(theta[i-1]-HALF_PI);
     rect(-20, 0, 40, 60);
+<<<<<<< HEAD
+    rotate(HALF_PI-theta[i-1]);
+    translate(-x,-y);
+   }  
+   //Game game = new Game();
+    //game.game();
+=======
     popMatrix();
   }
   rect(WIDTH/2-40, HEIGHT/3-20, 40, 60); //where to display DEALER
   //Game game = new Game();
   //game.game();
   noLoop();
+>>>>>>> 12c6767e591b5b23826c70416e18549e1f756556
 }
 void showCard(int player, int layer, PImage card) { //add image parameter
   fill(0);
@@ -81,6 +113,21 @@ void displayText(String text) {
 //}
 
 void draw(){
+<<<<<<< HEAD
+  try{
+  Deck test = new Deck();
+  test.shuffle();
+  showCard(2,0,test.deal().getImage());
+  showCard(2,1,test.deal().getImage());
+
+  showCard(2,2,test.deal().getImage());
+  }
+  catch (Exception ex){
+    ex.printStackTrace();
+  }
+  System.out.println(current);
+  
+=======
 //  Deck test = new Deck();
 //  test.shuffle();
 //  showCard(2,0,test.deal().getImage());
@@ -90,4 +137,5 @@ void draw(){
   displayText("testing");
   displayText("2");
   displayText("65");
+>>>>>>> 12c6767e591b5b23826c70416e18549e1f756556
 }
