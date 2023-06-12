@@ -41,6 +41,17 @@ fixed debugging issues with resetting including problems with player numbering a
 
 added chips and betting to game. Ready for demo
 
+### 6/1-6/4
+
+Used user input in processing. Ran into lots of bugs regarding draw
+
+### 6/4 - 6/10
+
+Moved over to buttons. Worked out library
+
+### 6/11
+Finally out all together.
+
 
 ## JOCELYN MO
 
