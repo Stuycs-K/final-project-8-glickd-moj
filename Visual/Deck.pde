@@ -4,17 +4,22 @@ import java.io.FileNotFoundException;
 public class Deck {
   private ArrayList<Card> deck;
   private ArrayList<PImage> deckImg = new ArrayList<PImage>(52);
+  public Card back;
 
   public void loadImages() {
     File folder = new File(dataPath(""));
-    //System.out.println(folder.exists());
     File[] pngs = folder.listFiles();
-    //String test = Arrays.toString(pngs);
-    //System.out.println(test);
+    //System.out.println(Arrays.toString(pngs));
     for (int i = 0; i < pngs.length; i++) {
       String path = pngs[i].getAbsolutePath();
-      PImage img = loadImage(path);
-      deckImg.add(img);
+      if (path.indexOf(".png") >= 0){
+        PImage img = loadImage(path);
+        deckImg.add(img);
+      }
+      if (path.indexOf(".jpg") >= 0){
+        PImage img = loadImage(path);
+        back = new Card(0, img);
+      }
     }
   }
 
