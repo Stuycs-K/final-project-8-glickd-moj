@@ -89,6 +89,7 @@ public class Hand{
     int numOfAces = 0;
     for(int i = 0; i < hand.size(); i++){
       Card temp = hand.get(i);
+      temp.displayValue();
       int value = temp.getValue();
       if(value > 10){
         value = 10;
@@ -111,6 +112,7 @@ public class Hand{
         total++;
       }
     }
+    System.out.println(total);
     return total;
   }
   

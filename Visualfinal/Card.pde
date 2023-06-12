@@ -11,8 +11,8 @@ public class Card{
     return image;
   }
   
-  public void seeImage(){
-    image(image, 0, 0);
+  public void seeImage(int x, int y){
+    image(image, x, y, 40, 60);
   }
 
   public void displayValue(){

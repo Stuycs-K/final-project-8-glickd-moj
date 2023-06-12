@@ -22,9 +22,9 @@ public class Deck {
   public Deck() {
     deck = new ArrayList<Card>(52);
     loadImages();
-    for (int i = 0; i < 4; i++) {
-      for (int j = 1; j < 13; j++) {
-        Card addition = new Card(j, deckImg.get(j+i*12));
+    for (int i = 1; i < 14; i++) {
+      for (int j = 0; j < 4; j++) {
+        Card addition = new Card(i, deckImg.get((i-1)*4+j));
         deck.add(addition);
       }
     }
@@ -41,6 +41,15 @@ public class Deck {
   public Card deal() {
     return deck.remove(0);
   }
+  
+  public void seeDeck(){
+    System.out.println(size());
+    for (int i = 0; i < size(); i++) {
+      deck.get(i).seeImage(2, 2+ 10*i);
+      deck.get(i).displayValue();
+      
+    }
+  }
 
   public void shuffle() {
     int deckSize = size();
@@ -50,5 +59,6 @@ public class Deck {
       shuffled.add(deck.remove(ind));
     }
     deck = shuffled;
+    //seeDeck();
   }
 }
