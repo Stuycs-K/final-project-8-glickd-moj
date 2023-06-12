@@ -95,3 +95,7 @@ moved all images to data directory (thanks Mr. K), figured out relative path for
 ### 6/6
 
 merged processing with main, now starting to adapt the game mechanism code for processing
+
+### 6/7-6/9
+
+display text method, design changes, dealer spot
