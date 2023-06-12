@@ -78,11 +78,9 @@ public class Hand{
     hasMoves = false;
   }
   public void hit(Deck deck){
+      hand.add(deck.deal());
       if(getValue()>21){
         bust = true;
-      }
-      else{
-        hand.add(deck.deal());
       }
   }
 
@@ -102,9 +100,9 @@ public class Hand{
         numOfAces++;
       }
     }
-    for(int i = 0; i < numOfAces-1; i++){
-      total++;
-    }
+    //for(int i = 0; i < numOfAces-1; i++){
+    //  total++;
+    //}
     if(numOfAces > 0){
       if(total+11 <= 21){
         total+= 11;
@@ -128,6 +126,10 @@ public class Hand{
     else{
       bet = n;
     }
+    clearTable();
+    displayText(" ");
+    displayText2(" ");
+
   }
    void displayCards(int pos){
     for(int i = 0; i < hand.size(); i++){

@@ -26,13 +26,13 @@ public class Game{
   }
   void dealerWin(){
     player.setChips(player.getChips()-player.getBet());
-    displayText("Now you are down to " + player.getChips() + "chips.");
+    displayText2("Now you are down to " + player.getChips() + "chips.");
     reset();
   }
   
   void playerWin(){
     player.setChips(player.getChips()+player.getBet());
-    displayText("Now you are up to " + player.getChips() + "chips.");
+    displayText2("Now you are up to " + player.getChips() + "chips.");
     reset();
   }
   
