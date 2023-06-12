@@ -110,3 +110,11 @@ merged processing with main, now starting to adapt the game mechanism code for p
 ### 6/7-6/9
 
 display text method, design changes, dealer spot
+
+### 6/10-6/11
+
+tried to make text animated by each character.. EPIC fail, helped with merge errors
+
+### 6/12
+
+game messily runs with one player, major bug fixing! 
