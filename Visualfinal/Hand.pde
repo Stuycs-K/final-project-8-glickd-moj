@@ -52,12 +52,10 @@ public class Hand{
   }
   void dealerMove(Deck deck){
     if(getValue() > 16){
-      System.out.println("too high");
       hasMoves = false;
     }
     else{
       while(getValue() <= 16){
-        System.out.println(getValue() + ".. hit!");
         hit(deck);
       }
     }
@@ -99,7 +97,6 @@ public class Hand{
     int numOfAces = 0;
     for(int i = 0; i < hand.size(); i++){
       Card temp = hand.get(i);
-      temp.displayValue();
       int value = temp.getValue();
       if(value > 10){
         value = 10;
@@ -122,7 +119,6 @@ public class Hand{
         total++;
       }
     }
-    System.out.println(total);
     return total;
   }
   

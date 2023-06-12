@@ -30,7 +30,6 @@ void setup() {
   clearTable();
   
 
-  rect(WIDTH/2-40, HEIGHT/3-20, 40, 60); //where to display DEALER
   cp5 = new ControlP5(this);
   game = new Game();
   newHand = cp5.addButton("New Hand");
@@ -96,17 +95,14 @@ void draw(){
     int winner = game.getWinner();
     if (winner == 0) {
       displayText("Not bad. It was a draw.");
-      System.out.println("Not bad. It was a draw.");
       game.playerWin();
     }
     else if (winner == -1) {
       displayText("Oh well, the dealer won.");
-      System.out.println("Oh well, the dealer won.");
       game.dealerWin();
     }
     else {
       displayText("Congrats, you win.");
-      System.out.println("Congrats, you win.");
       game.playerWin();
     }
   }
@@ -166,6 +162,8 @@ void clearTable(){
     rect(-20, 0, 40, 60);
     popMatrix();
   }
+    rect(WIDTH/2-40, HEIGHT/3-20, 40, 60); //where to display DEALER
+
 }
 void showCard(int player, int layer, PImage card) { //add image parameter
   fill(0);
