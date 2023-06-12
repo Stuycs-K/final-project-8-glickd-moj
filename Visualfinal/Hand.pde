@@ -17,7 +17,7 @@ public class Hand{
     }
   }
   void displayDealerHand(boolean over){
-    if(over){
+    if(!over){
       for(int i = 0; i < hand.size(); i++){
         showDealerEnd(i,hand.get(i).getImage());
       }

@@ -15,6 +15,7 @@ public class Game{
     deck = new Deck();
     deck.shuffle();
     started = false;
+    playing = true;
   }
   
   void dealerTurn(){
@@ -24,10 +25,15 @@ public class Game{
     return playing;
   }
   void dealerWin(){
-    
+    player.setChips(player.getChips()-player.getBet());
+    displayText("Now you are down to " + player.getChips() + "chips.");
+    reset();
   }
   
   void playerWin(){
+    player.setChips(player.getChips()+player.getBet());
+    displayText("Now you are up to " + player.getChips() + "chips.");
+    reset();
   }
   
   boolean started(){
@@ -91,6 +97,7 @@ public class Game{
     player.reset();
     deck.shuffle();
     started = false;
+    playing = true;
   }
 }
   

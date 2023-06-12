@@ -94,21 +94,9 @@ void displayText(String text) {
   fill(70, 42, 14);
   //textFont(prompt);
   text(text, 55, 120);
-  int x = 55;
-  long start = millis();
-  for (int i = 0; i < text.length(); i++) {
-    //long current = millis();
-    //while(current - start < 500){
-    //current = millis();
-    //    //System.out.println("no");
-    //}
-    //System.out.println(text.charAt(i));
-    displayChar(text.charAt(i), x, 120);
-    x += textWidth(text.charAt(i))+ 5;
-    //start = current;
-  }
 }
 void draw(){
+  checkButtons();
   game.displayDealerHand();
   game.displayCards(4);
   if (game.playing() && game.isDealerTurn()) {
@@ -118,6 +106,7 @@ void draw(){
     int winner = game.getWinner();
     if (winner == 0) {
       displayText("Not bad. It was a draw.");
+      game.playerWin();
     }
     else if (winner == -1) {
       displayText("Oh well, the dealer won.");
@@ -129,19 +118,22 @@ void draw(){
     }
   }
 }
-
-void controlEvent(ControlEvent event){
-  if(event.isFrom(stand)){
+void mouseClicked(){
+  checkButtons();
+}
+void checkButtons(){
+  if(stand.isPressed() && game.started() && game.playing()){
     game.stand();
   }
-  else if(event.isFrom(hit) && game.started()){
+  else if(hit.isPressed() && game.started() && game.playing()){
     game.hit();
   }
-  else if(event.isFrom(bet) && !game.started()){
+  else if(bet.isPressed() && !game.started()){
     game.bet((int)betAmount.getValue());
     game.startGame();
   }
-  else if (event.isFrom(newHand)) {
+  else if(newHand.isPressed()){
+    loop();
     game.reset();
     betAmount = cp5.addSlider("Bet Amount");
     betAmount.setValue(5);
@@ -149,15 +141,13 @@ void controlEvent(ControlEvent event){
     betAmount.setPosition(525,720);
     betAmount.setRange(0, 100);
     betAmount.setNumberOfTickMarks(101);
-   }
-   else if (event.isFrom(newGame)) {
+  }
+  else if(newGame.isPressed()){
+    loop();
     game = new Game();
-    //setup();
-   }
+  } 
 }
-
     
-
 void displayChar(char letter, int x, int y) {
   text(letter, x, y);
 }
