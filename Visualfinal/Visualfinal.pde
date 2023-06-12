@@ -128,15 +128,21 @@ void checkButtons(){
   else if(newHand.isPressed()){
     loop();
     game.reset();
+    clearTable();
+    displayText(" ");
+    displayText2(" ");
     betAmount = cp5.addSlider("Bet Amount");
     betAmount.setValue(5);
     betAmount.setSize(120,50);
-    betAmount.setPosition(525,720);
+    betAmount.setPosition(575,760);
     betAmount.setRange(0, 100);
     betAmount.setNumberOfTickMarks(101);
   }
   else if(newGame.isPressed()){
     loop();
+    clearTable();
+    displayText(" ");
+    displayText2(" ");
     game = new Game();
   } 
 }

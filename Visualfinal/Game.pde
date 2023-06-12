@@ -61,6 +61,9 @@ public class Game{
       playing = false;
     }
   }
+  void playing(boolean x){
+    playing = x;
+  }
   void bet(int n){
     player.bet(n);
   }
@@ -99,6 +102,7 @@ public class Game{
     deck.shuffle();
     started = false;
     playing = true;
+    
   }
 }
   

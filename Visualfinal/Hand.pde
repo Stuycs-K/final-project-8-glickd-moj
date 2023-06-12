@@ -17,11 +17,14 @@ public class Hand{
     }
   }
   void displayDealerHand(boolean over){
-    if(!over){
-      game.dealerTurn();
+    if(!game.player.playing()){
+      if(game.dealer.hasMoves() && !game.player.isBusted()){
+        game.dealerTurn();
+      }
       for(int i = 0; i < hand.size(); i++){
         showDealerEnd(i,hand.get(i).getImage());
       }
+      
     }
     else{
       for(int i = 0; i < hand.size(); i++){
@@ -86,6 +89,8 @@ public class Hand{
       hand.add(deck.deal());
       if(getValue()>21){
         bust = true;
+        hasMoves = false;
+        game.playing(false);
       }
   }
 
@@ -133,10 +138,7 @@ public class Hand{
     else{
       bet = n;
     }
-    clearTable();
-    displayText(" ");
-    displayText2(" ");
-    System.out.println(game.playing());
+    
 
   }
    void displayCards(int pos){
