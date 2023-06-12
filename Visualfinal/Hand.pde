@@ -6,34 +6,60 @@ public class Hand{
   private int chips = 0;
   private int bet;
   private String playerNum;
+  
   public Hand(int i, int chip){
     hasMoves = true;
+    bust = false;
     chips = chip;
     playerNum = "" + i;
     if(i == 0){
       playerNum = "dealer";
     }
   }
-  public String getPlayer(){
-    return playerNum;
+  void displayDealerHand(boolean over){
+    if(over){
+      for(int i = 0; i < hand.size(); i++){
+        showDealerEnd(i,hand.get(i).getImage());
+      }
+    }
+    else{
+      for(int i = 0; i < hand.size(); i++){
+        showDealer(i,hand.get(i).getImage());
+      }
+    }
   }
-  public void removeCards(){
-    hand.clear();
+  ArrayList<Card> getHand() {
+    return hand;
   }
-
+  boolean isBusted(){
+    return bust;
+  }
+  boolean hasMoves(){
+    return hasMoves;
+  }
+  int getChips(){
+    return chips;
+  }
+  boolean playing(){
+    return hasMoves && !bust;
+  }
+  public int getBet(){
+   return bet;
+  }
+  void dealerMove(Deck deck){
+    if(getValue() > 16){
+      hasMoves = false;
+    }
+    else{
+      hit(deck);
+    }
+  }
   public void setBet(int x){
     bet = x;
   }
 
-  public int getBet(){
-    return bet;
-  }
-
   public void setBust(boolean x){
     bust = x;
-  }
-  public int getChips(){
-    return chips;
   }
 
   public void setChips(int x){
@@ -51,49 +77,13 @@ public class Hand{
   public void stand(){
     hasMoves = false;
   }
-  public boolean isBust(){
-    return bust;
-  }
-  public void hit(Deck deck, int i){
-    if(getValue() > 21){
-      bust = true;
-    }
-    else{
-      hand.add(deck.deal());
-      displayCards(i);
-    }
-  }
-
-  public void displayCards(int j){
-    for(int i = 0; i < hand.size(); i++){
-      showCard(j,i,hand.get(i).getImage());
-    }
-    if(getValue() <= 21){
-      displayText("The total value of player " + playerNum + "'s hand is " + getValue());
-      displayText("\n");
-    }
-    else{
-      displayText("Whoops, the hand is a bust.");
-      displayText("\n");
-      bust = true;
-    }
-  }
-  
-  public void displayCardsDealer(){
-    for(int i = 0; i < hand.size(); i++){
-      showDealer(i, hand.get(i).getImage());
-    }
-  }
-  public boolean hasMoves(){
-    if(getValue() > 21){
-      hasMoves = false;
-      bust = true;
-    }
-    return hasMoves;
-  }
-
-  public int numOfCards(){
-    return hand.size();
+  public void hit(Deck deck){
+      if(getValue()>21){
+        bust = true;
+      }
+      else{
+        hand.add(deck.deal());
+      }
   }
 
   public int getValue(){
@@ -125,4 +115,24 @@ public class Hand{
     }
     return total;
   }
+  
+  void reset(){
+    hand = new ArrayList<Card>(0);
+    bust = false;
+    hasMoves = true;
+  }
+  void bet(int n){
+    if(n > chips){
+      displayText("You bet more than you had, get out of here...");
+    }
+    else{
+      bet = n;
+    }
+  }
+   void displayCards(int pos){
+    for(int i = 0; i < hand.size(); i++){
+      showCard(pos, i, hand.get(i).getImage());
+    }
+   }
 }
+  

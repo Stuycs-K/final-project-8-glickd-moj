@@ -9,6 +9,7 @@ Button newHand;
 Button toBet;
 Button newGame;
 Slider betAmount;
+Button bet;
 int playerNum;
 static int WIDTH = 1000;
 static int HEIGHT = 1000;
@@ -25,7 +26,6 @@ ControlP5 cp5;
 void setup() {
   size(1000, 1000);
   background(152, 133, 88);
-  //prompt = createFont("Poppins-Black.ttf", 32);
   fill(165, 42, 42);
   stroke(165, 42, 42);
   arc(WIDTH/2, HEIGHT/4-20, boardW+40, 2*boardH+85, 0, PI);
@@ -49,10 +49,10 @@ void setup() {
     translate(-x, -y);
     popMatrix();
   }
+
   rect(WIDTH/2-40, HEIGHT/3-20, 40, 60); //where to display DEALER
   cp5 = new ControlP5(this);
   game = new Game();
-
   newHand = cp5.addButton("New Hand");
   newHand.setValue(0);
   newHand.setSize(120, 50);
@@ -68,13 +68,18 @@ void setup() {
   hit.setSize(120, 50);
   hit.setPosition(275, 720);
   
+  bet = cp5.addButton("Bet");
+  bet.setValue(0);
+  bet.setSize(120,50);
+  bet.setPosition(700,720);
+  
   stand = cp5.addButton("Stand");
   stand.setValue(0);
   stand.setSize(120, 50);
   stand.setPosition(400, 720);
   
   betAmount = cp5.addSlider("Bet Amount");
-  betAmount.setValue(10);
+  betAmount.setValue(5);
   betAmount.setSize(120,50);
   betAmount.setPosition(525,720);
   betAmount.setRange(0, 100);
@@ -104,23 +109,51 @@ void displayText(String text) {
   }
 }
 void draw(){
+  game.displayDealerHand();
   game.displayCards(4);
-  game.displayCards(0);
-  //while(game.isntBust()){
-  //  displayText("Please hit or stand.");
-  //}
+  if (game.playing() && game.isDealerTurn()) {
+    game.dealerTurn();
+  }
+  if(!game.playing()){
+    int winner = game.getWinner();
+    if (winner == 0) {
+      displayText("Not bad. It was a draw.");
+    }
+    else if (winner == -1) {
+      displayText("Oh well, the dealer won.");
+      game.dealerWin();
+    }
+    else {
+      displayText("Congrats, you win.");
+      game.playerWin();
+    }
+  }
 }
 
 void controlEvent(ControlEvent event){
-  if(event.isFrom(hit)){
-    game.hit(4);
-  }
-  else if(event.isFrom(stand)){
+  if(event.isFrom(stand)){
     game.stand();
   }
-  else if(event.isFrom(betAmount)){
-    game.playerBet((int)betAmount.getValue());
+  else if(event.isFrom(hit) && game.started()){
+    game.hit();
   }
+  else if(event.isFrom(bet) && !game.started()){
+    game.bet((int)betAmount.getValue());
+    game.startGame();
+  }
+  else if (event.isFrom(newHand)) {
+    game.reset();
+    betAmount = cp5.addSlider("Bet Amount");
+    betAmount.setValue(5);
+    betAmount.setSize(120,50);
+    betAmount.setPosition(525,720);
+    betAmount.setRange(0, 100);
+    betAmount.setNumberOfTickMarks(101);
+   }
+   else if (event.isFrom(newGame)) {
+    game = new Game();
+    //setup();
+   }
 }
 
     
@@ -144,4 +177,4 @@ void showDealerEnd(int layer, PImage card){
 }
 void showDealer(int layer, PImage card){
   image(card ,WIDTH/2-40, HEIGHT/3-20, 40, 60);
-}
+  }
