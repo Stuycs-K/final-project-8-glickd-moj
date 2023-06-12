@@ -26,7 +26,7 @@ ControlP5 cp5;
 void setup() {
   size(1000, 1000);
   //prompt = createFont("Poppins-Black.TTF", 32);
-  background(152, 133, 88);
+  background(98, 131, 133);
   clearTable();
   
 
@@ -36,40 +36,40 @@ void setup() {
   newHand = cp5.addButton("New Hand");
   newHand.setValue(0);
   newHand.setSize(120, 50);
-  newHand.setPosition(25, 720);
+  newHand.setPosition(75, 760);
 
   newGame = cp5.addButton("New Game");
   newGame.setValue(0);
   newGame.setSize(120, 50);
-  newGame.setPosition(150, 720);
+  newGame.setPosition(200, 760);
   
   hit = cp5.addButton("Hit");
   hit.setValue(0);
   hit.setSize(120, 50);
-  hit.setPosition(275, 720);
+  hit.setPosition(325, 760);
   
   bet = cp5.addButton("Bet");
   bet.setValue(0);
   bet.setSize(120,50);
-  bet.setPosition(700,720);
+  bet.setPosition(750,760);
   
   stand = cp5.addButton("Stand");
   stand.setValue(0);
   stand.setSize(120, 50);
-  stand.setPosition(400, 720);
+  stand.setPosition(450, 760);
   
   betAmount = cp5.addSlider("Bet Amount");
   betAmount.setValue(5);
   betAmount.setSize(120,50);
-  betAmount.setPosition(525,720);
+  betAmount.setPosition(575,760);
   betAmount.setRange(0, 100);
   betAmount.setNumberOfTickMarks(101);
  
 }
 
 void displayText(String text) {
-  stroke(152, 133, 88);
-  fill(152, 133, 88);
+  stroke(98, 131, 133);
+  fill(98, 131, 133);
   rect(50, 90, WIDTH*2/3, HEIGHT*1/20);
   fill(70, 42, 14);
   //textFont(prompt);
@@ -77,8 +77,8 @@ void displayText(String text) {
   text(text, 55, 120);
 }
 void displayText2(String text) {
-  stroke(152, 133, 88);
-  fill(152, 133, 88);
+  stroke(98, 131, 133);
+  fill(98, 131, 133);
   rect(50, 140, WIDTH*2/3, HEIGHT*1/20);
   fill(70, 42, 14);
   //textFont(prompt);
@@ -142,7 +142,7 @@ void checkButtons(){
 }
     
 void clearTable(){
-  fill(21, 68, 6);
+  fill(25, 79, 57);
   strokeWeight(30);
   stroke(70, 42, 14);
   arc(WIDTH/2, HEIGHT/4, boardW, 2*boardH, 0, PI, CHORD);

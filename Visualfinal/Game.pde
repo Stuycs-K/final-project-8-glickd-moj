@@ -20,6 +20,7 @@ public class Game{
   
   void dealerTurn(){
     dealer.dealerMove(deck);
+    System.out.println("DEALER");
   }
   boolean playing(){
     return playing;

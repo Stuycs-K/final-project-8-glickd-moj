@@ -18,6 +18,7 @@ public class Hand{
   }
   void displayDealerHand(boolean over){
     if(!over){
+      game.dealerTurn();
       for(int i = 0; i < hand.size(); i++){
         showDealerEnd(i,hand.get(i).getImage());
       }
@@ -48,10 +49,14 @@ public class Hand{
   }
   void dealerMove(Deck deck){
     if(getValue() > 16){
+      System.out.println("too high");
       hasMoves = false;
     }
     else{
-      hit(deck);
+      while(getValue() <= 16){
+        System.out.println(getValue() + ".. hit!");
+        hit(deck);
+      }
     }
   }
   public void setBet(int x){
@@ -131,6 +136,7 @@ public class Hand{
     clearTable();
     displayText(" ");
     displayText2(" ");
+    System.out.println(game.playing());
 
   }
    void displayCards(int pos){
